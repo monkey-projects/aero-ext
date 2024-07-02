@@ -1,7 +1,9 @@
 (ns monkey.aero
   (:require [aero.core :as ac]
-            [buddy.core.keys.pem :as pem])
-  (:import java.util.Base64))
+            [buddy.core.keys.pem :as pem]
+            [clojure.edn :as edn])
+  (:import java.util.Base64
+           [java.io PushbackReader StringReader]))
 
 (defn- resolve-path [{:keys [resolver source]} path]
   ;; Copied from the aero source, which unfortunately does not expose this as a fn.
@@ -34,5 +36,9 @@
   (with-open [r (java.io.StringReader. arg)]
     (pem/read-privkey r nil)))
 
-(defmethod ac/reader 'edn [_ _ arg]
+(defmethod ac/reader 'to-edn [_ _ arg]
   (pr-str arg))
+
+(defmethod ac/reader 'from-edn [opts _ arg]
+  (with-open [r (PushbackReader. (StringReader. arg))]
+    (edn/read r)))

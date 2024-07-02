@@ -26,7 +26,12 @@
     (is (instance? java.security.PrivateKey (-> (ac/read-config (io/resource "privkey-test.edn"))
                                                 :private-key)))))
 
-(deftest edn
+(deftest to-edn
   (testing "converts arg to edn"
     (is (= {:text "{:key \"value\"}"}
-           (ac/read-config (io/resource "edn-test.edn"))))))
+           (ac/read-config (io/resource "to-edn-test.edn"))))))
+
+(deftest from-edn
+  (testing "parses arg from edn"
+    (is (= {:edn {:key "value"}}
+           (ac/read-config (io/resource "from-edn-test.edn"))))))
