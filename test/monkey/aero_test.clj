@@ -25,3 +25,8 @@
   (testing "reads arg as pem private key"
     (is (instance? java.security.PrivateKey (-> (ac/read-config (io/resource "privkey-test.edn"))
                                                 :private-key)))))
+
+(deftest edn
+  (testing "converts arg to edn"
+    (is (= {:text "{:key \"value\"}"}
+           (ac/read-config (io/resource "edn-test.edn"))))))

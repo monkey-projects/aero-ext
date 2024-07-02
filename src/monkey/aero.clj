@@ -33,3 +33,6 @@
 (defmethod ac/reader 'privkey [_ _ arg]
   (with-open [r (java.io.StringReader. arg)]
     (pem/read-privkey r nil)))
+
+(defmethod ac/reader 'edn [_ _ arg]
+  (pr-str arg))

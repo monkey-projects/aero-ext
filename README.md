@@ -27,6 +27,13 @@ Then enable the readers just by requiring the ns:
 
 These are the readers that are provided by this library.
 
+### edn
+
+Serializes the argument to an `edn` string.
+```clojure
+{:config-str #edn {:key "value"}}
+```
+
 ### file
 
 To include any file as a string in your config, use `#file`:
