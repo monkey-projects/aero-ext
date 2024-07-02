@@ -1,0 +1,2 @@
+{:first #deep-merge [{:second {:third "value"}}
+                     {:second {:fourth "other value"}}]}

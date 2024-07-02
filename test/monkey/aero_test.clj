@@ -35,3 +35,9 @@
   (testing "parses arg from edn"
     (is (= {:edn {:key "value"}}
            (ac/read-config (io/resource "from-edn-test.edn"))))))
+
+(deftest deep-merge
+  (testing "deep-merges maps"
+    (is (= {:first {:second {:third "value"
+                             :fourth "other value"}}}
+           (ac/read-config (io/resource "deep-merge-test.edn"))))))

@@ -27,11 +27,37 @@ Then enable the readers just by requiring the ns:
 
 These are the readers that are provided by this library.
 
-### edn
+### to-edn
 
 Serializes the argument to an `edn` string.
 ```clojure
-{:config-str #edn {:key "value"}}
+{:config-str #to-edn {:key "value"}}
+```
+
+### from-edn
+
+Opposite of `#to-edn`, parses an `edn` string:
+```clojure
+{:config-str #from-edn "{:key \"value\"}"}
+```
+
+This is useful when you want to process an edn file before including it in your config
+(like decrypting it).
+
+### deep-merge
+
+Similar to Aero's `#merge`, this performs a deep merge.  Existing maps don't overwrite eachother,
+but are merged again:
+```clojure
+{:value #deep-merge [{:first {:second "value"}}
+                     {:first {:third "other value"}}]}
+```
+This will result in a map like this:
+```clojure
+{:value
+ {:first
+  {:second "value"
+   :third "other value"}}}
 ```
 
 ### file

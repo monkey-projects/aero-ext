@@ -1,7 +1,8 @@
 (ns monkey.aero
   (:require [aero.core :as ac]
             [buddy.core.keys.pem :as pem]
-            [clojure.edn :as edn])
+            [clojure.edn :as edn]
+            [medley.core :as mc])
   (:import java.util.Base64
            [java.io PushbackReader StringReader]))
 
@@ -42,3 +43,6 @@
 (defmethod ac/reader 'from-edn [opts _ arg]
   (with-open [r (PushbackReader. (StringReader. arg))]
     (edn/read r)))
+
+(defmethod ac/reader 'deep-merge [opts _ args]
+  (apply mc/deep-merge args))

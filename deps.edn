@@ -1,5 +1,6 @@
 {:deps {aero/aero {:mvn/version "1.1.6"}
-        buddy/buddy-sign {:mvn/version "3.5.346"}}
+        buddy/buddy-sign {:mvn/version "3.5.346"}
+        medley/medley {:mvn/version "1.4.0"}}
  
  :aliases
  {:dev
