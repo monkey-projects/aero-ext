@@ -46,3 +46,22 @@
 
 (defmethod ac/reader 'deep-merge [opts _ args]
   (apply mc/deep-merge args))
+
+(defmulti ->str class)
+
+(defmethod ->str java.lang.String [arg]
+  arg)
+
+(def byte-array-class (class (byte-array 0)))
+
+(defmethod ->str byte-array-class [arg]
+  (String. arg))
+
+(defmethod ->str :default [arg]
+  (str arg))
+
+(defmethod ac/reader 'str [opts _ arg]
+  (->str arg))
+
+(defmethod ac/reader 'random [opts _ args]
+  (nth args (rand-int (count args))))

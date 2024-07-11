@@ -92,6 +92,22 @@ Will parse the argument as a PEM-encoded private key.  The result is a `java.sec
 {:private-key #privkey #file "ssh/private-key.pem"}
 ```
 
+### str
+
+Converts the argument to a string.  Useful in combination with `#from-b64`, which returns
+a byte array.
+```clojure
+{:password #str #from-b64 #env PASSWORD}
+```
+
+### random
+
+Selects an item at random from the argument list.
+```clojure
+{:continent #random ["europe" "asia" "africa" "north-america" "south-america" "oceania"]}
+```
+It has its uses ;-).
+
 ## License
 
 Copyright (c) 2024 by [Monkey Projects BV](https://www.monkey-projects.be)
