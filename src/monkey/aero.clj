@@ -2,7 +2,7 @@
   (:require [aero.core :as ac]
             [buddy.core.keys.pem :as pem]
             [clojure.edn :as edn]
-            [medley.core :as mc])
+            [meta-merge.core :as mm])
   (:import java.util.Base64
            [java.io PushbackReader StringReader]))
 
@@ -44,8 +44,12 @@
   (with-open [r (PushbackReader. (StringReader. arg))]
     (edn/read r)))
 
+(defmethod ac/reader 'meta-merge [opts _ args]
+  (apply mm/meta-merge args))
+
+;; Kept this for backwards compatibility
 (defmethod ac/reader 'deep-merge [opts _ args]
-  (apply mc/deep-merge args))
+  (apply mm/meta-merge args))
 
 (defmulti ->str class)
 

@@ -56,11 +56,24 @@
     (is (= {:edn {:key "value"}}
            (read-test-config "{:edn #from-edn \"{:key \\\"value\\\"}\"}")))))
 
+(defn- test-meta-merge []
+  (is (= {:top {:child [:first :second]}}
+         (read-test-config "{:top #meta-merge [{:child [:second]} {:child ^:prepend [:first]}]}"))))
+
 (deftest deep-merge
   (testing "deep-merges maps"
     (is (= {:first {:second {:third "value"
                              :fourth "other value"}}}
-           (ac/read-config (io/resource "deep-merge-test.edn"))))))
+           (ac/read-config (io/resource "deep-merge-test.edn")))))
+
+  (testing "meta-merges datastructures"
+    (is (= {:top {:child [:first :second]}}
+           (read-test-config "{:top #deep-merge [{:child [:second]} {:child ^:prepend [:first]}]}")))))
+
+(deftest meta-merge
+  (testing "meta-merges datastructures"
+    (is (= {:top {:child [:first :second]}}
+           (read-test-config "{:top #meta-merge [{:child [:second]} {:child ^:prepend [:first]}]}")))))
 
 (deftest str-tag
   (testing "converts byte array arg to string"

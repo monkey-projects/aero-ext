@@ -44,12 +44,13 @@ Opposite of `#to-edn`, parses an `edn` string:
 This is useful when you want to process an edn file before including it in your config
 (like decrypting it).
 
-### deep-merge
+### meta-merge
 
-Similar to Aero's `#merge`, this performs a deep merge.  Existing maps don't overwrite eachother,
-but are merged again:
+Similar to Aero's `#merge`, this performs a deep merge using
+[meta-merge](https://github.com/weavejester/meta-merge).  Existing maps don't overwrite
+eachother, but are merged again:
 ```clojure
-{:value #deep-merge [{:first {:second "value"}}
+{:value #meta-merge [{:first {:second "value"}}
                      {:first {:third "other value"}}]}
 ```
 This will result in a map like this:
@@ -59,6 +60,13 @@ This will result in a map like this:
   {:second "value"
    :third "other value"}}}
 ```
+
+See the [meta-merge docs](https://github.com/weavejester/meta-merge) for more details.
+`#deep-merge` is a synonym, for backwards compatibility.
+
+### deep-merge
+
+See `meta-merge`.
 
 ### file
 
