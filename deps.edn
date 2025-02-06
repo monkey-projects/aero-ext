@@ -1,5 +1,5 @@
 {:deps {aero/aero {:mvn/version "1.1.6"}
-        buddy/buddy-sign {:mvn/version "3.5.346"}
+        buddy/buddy-sign {:mvn/version "3.6.1-359"}
         meta-merge/meta-merge {:mvn/version "1.0.0"}}
  
  :aliases
@@ -7,8 +7,8 @@
   {:extra-paths ["env/dev" "dev-resources"]}
 
   :test
-  {:extra-deps {babashka/fs {:mvn/version "0.5.21"}
-                com.monkeyprojects/build {:mvn/version "0.2.0"}}
+  {:extra-deps {babashka/fs {:mvn/version "0.5.24"}
+                com.monkeyprojects/build {:mvn/version "0.3.1"}}
    :extra-paths ["test" "dev-resources"]
    :exec-fn monkey.test/all}
 
@@ -23,11 +23,11 @@
    :exec-args {:ns-regex ["monkey.aero.*"]}}
 
   :jar
-  {:extra-deps {com.monkeyprojects/build {:mvn/version "0.2.0"}}
+  {:extra-deps {com.monkeyprojects/build {:mvn/version "0.3.1"}}
    :exec-fn monkey.build/jar
    :exec-args {:jar "target/aero-ext.jar"
                :lib "com.monkeyprojects/aero-ext"
-               :version-env "LIB_VERSION"
+               :version [[:env "LIB_VERSION"] "0.2.1-SNAPSHOT"]
                :scm {:url "https://github.com/monkey-projects/aero-ext"}}}
 
   :install

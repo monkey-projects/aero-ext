@@ -34,8 +34,19 @@
   (b64-> arg))
 
 (defmethod ac/reader 'privkey [_ _ arg]
+  ;; If arg is a string, it's assumed to contain the key
+  ;; If it's a vector, the first should be the key, the second the passphrase
+  (let [[keystr passwd] (cond
+                          (string? arg) [arg nil]
+                          (vector? arg) arg
+                          :else (throw
+                                 (ex-info "Private key must either consist of a string, or a vector containing the key and the passphrase" {:arg arg})))]
+    (with-open [r (java.io.StringReader. keystr)]
+      (pem/read-privkey r passwd))))
+
+(defmethod ac/reader 'pubkey [_ _ arg]
   (with-open [r (java.io.StringReader. arg)]
-    (pem/read-privkey r nil)))
+    (pem/read-pubkey r)))
 
 (defmethod ac/reader 'to-edn [_ _ arg]
   (pr-str arg))

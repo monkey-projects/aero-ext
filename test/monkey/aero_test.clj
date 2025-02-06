@@ -43,8 +43,20 @@
 
 (deftest privkey
   (testing "reads arg as pem private key"
-    (is (instance? java.security.PrivateKey (-> (ac/read-config (io/resource "privkey-test.edn"))
-                                                :private-key)))))
+    (is (instance? java.security.PrivateKey
+                   (-> (ac/read-config (io/resource "privkey-test.edn"))
+                       :private-key))))
+
+  (testing "can specify passkey"
+    (is (instance? java.security.PrivateKey
+                   (-> (read-test-config "{:private-key #privkey [#file \"test-key.pem.enc\" \"secretpass\"]}")
+                       :private-key)))))
+
+(deftest pubkey
+  (testing "reads arg as pem public key"
+    (is (instance? java.security.PublicKey
+                   (-> (read-test-config "{:public-key #pubkey #file \"test-key-pub.pem\"}")
+                       :public-key)))))
 
 (deftest to-edn
   (testing "converts arg to edn"

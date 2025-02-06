@@ -100,6 +100,22 @@ Will parse the argument as a PEM-encoded private key.  The result is a `java.sec
 {:private-key #privkey #file "ssh/private-key.pem"}
 ```
 
+If the key is encrypted, you can specify the password by using a vector:
+```clojure
+{:private-key #privkey [#file "ssh/private-key.pem" "verysecretpass"]}
+```
+
+Returns a `java.security.PrivateKey`.
+
+### pubkey
+
+The counterpart of `privkey` for public `PEM` keys:
+```clojure
+{:public-key #pubkey #file "ssh/public-key.pem"}
+```
+
+Returns a `java.security.PublicKey`.
+
 ### str
 
 Converts the argument to a string.  Useful in combination with `#from-b64`, which returns
