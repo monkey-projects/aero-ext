@@ -1,5 +1,7 @@
 # Aero Extensions
 
+[![Clojars Project](https://img.shields.io/clojars/v/com.monkeyprojects/aero-ext.svg)](https://clojars.org/com.monkeyprojects/aero-ext)
+
 This is a Clojure lib that adds some more tag readers to use with [Aero](https://github.com/juxt/aero?tab=readme-ov-file).  This is a configuration library that reads `.edn` files but adds
 some additional functionality to it.  For use with our own projects, we have
 created this library, that adds some more extensions.
@@ -9,7 +11,7 @@ created this library, that adds some more extensions.
 First include the library:
 ```clojure
 ;; deps.edn
-{:deps {com.monkeyprojects/aero-ext {:mvn/version "<version>"}}}
+{:deps {com.monkeyprojects/aero-ext {:mvn/version "0.3.0"}}}
 ```
 
 Then enable the readers just by requiring the ns:
