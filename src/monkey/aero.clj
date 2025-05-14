@@ -53,7 +53,7 @@
 
 (defmethod ac/reader 'from-edn [opts _ arg]
   (with-open [r (PushbackReader. (StringReader. arg))]
-    (edn/read r)))
+    (ac/read-config r)))
 
 (defmethod ac/reader 'meta-merge [opts _ args]
   (apply mm/meta-merge args))

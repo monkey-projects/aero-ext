@@ -66,7 +66,12 @@
 (deftest from-edn
   (testing "parses arg from edn"
     (is (= {:edn {:key "value"}}
-           (read-test-config "{:edn #from-edn \"{:key \\\"value\\\"}\"}")))))
+           (read-test-config "{:edn #from-edn \"{:key \\\"value\\\"}\"}"))))
+
+  (testing "applies aero tags in parsed edn"
+    (is (= {:edn {:key "other-value"
+                  :other "other-value"}}
+           (read-test-config "{:edn #from-edn \"{:key #ref [:other] :other \\\"other-value\\\"}\"}")))))
 
 (defn- test-meta-merge []
   (is (= {:top {:child [:first :second]}}

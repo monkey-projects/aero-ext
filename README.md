@@ -13,6 +13,10 @@ First include the library:
 ;; deps.edn
 {:deps {com.monkeyprojects/aero-ext {:mvn/version "0.3.0"}}}
 ```
+Or with Leiningen:
+```clojure
+:dependencies [[com.monkeyprojects/aero-ext "0.3.0"]]
+```
 
 Then enable the readers just by requiring the ns:
 ```clojure
