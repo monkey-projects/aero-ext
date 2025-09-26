@@ -7,7 +7,7 @@
   {:extra-paths ["env/dev" "dev-resources"]}
 
   :test
-  {:extra-deps {babashka/fs {:mvn/version "0.5.25"}
+  {:extra-deps {babashka/fs {:mvn/version "0.5.27"}
                 com.monkeyprojects/build {:mvn/version "0.3.1"}}
    :extra-paths ["test" "dev-resources"]
    :exec-fn monkey.test/all}
